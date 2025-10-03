@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports - BudgetBuddy</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Mobile Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <button id="closeSidebar" class="close-btn">&times;</button>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-logo">
+                <h2>BudgetBuddy</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="add-transaction.html"><i class="fas fa-plus-minus"></i> Add Transaction</a></li>
+                    <li><a href="transactions.html"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+                    <li><a href="reports.html"><i class="fas fa-chart-pie"></i> Reports</a></li>
+                    <li><a href="budget.html"><i class="fas fa-rupee-sign"></i> Budget</a></li>
+                    <li class="logout-item"><a href="#" id="sidebarLogout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main navbar -->
+    <header class="main-header">
+        <div class="navbar">
+            <div class="navbar-left">
+                <button id="sidebarToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <div class="logo">
+                    <h1>BudgetBuddy</h1>
+                </div>
+            </div>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="add-transaction.html">Add Transaction</a></li>
+                    <li><a href="transactions.html">Transactions</a></li>
+                    <li class="active"><a href="reports.html">Reports</a></li>
+                    <li><a href="budget.html">Budget</a></li>
+                </ul>
+            </nav>
+            <div class="navbar-right">
+                <a href="#" id="logoutBtn" class="logout-btn" title="Logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+        <div class="header-content">
+            <h2>Financial Reports</h2>
+            <p>Analyze your spending patterns and track your financial progress</p>
+        </div>
+    </header>
+    
+    <main class="mainContainer">
+        <!-- Report Filter Section -->
+        <section class="reportFilterSection">
+            <div class="periodSelector">
+                <button class="period-btn active" data-period="month">This Month</button>
+                <button class="period-btn" data-period="quarter">Last 3 Months</button>
+                <button class="period-btn" data-period="halfyear">Last 6 Months</button>
+                <button class="period-btn" data-period="year">This Year</button>
+                <div class="custom-period">
+                    <span>Custom: </span>
+                    <input type="date" id="customStartDate">
+                    <span>to</span>
+                    <input type="date" id="customEndDate">
+                    <button class="btn filter-btn" id="applyCustomDate">Apply</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Summary Cards -->
+        <section class="reportCards">
+            <div class="reportCard income">
+                <h3>Total Income</h3>
+                <p id="reportTotalIncome">₹0.00</p>
+                <div class="change-indicator positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span id="incomeChangePercent">0%</span> vs previous period
+                </div>
+                <div class="transaction-split">
+                    <span id="incomeCount" class="income-count">0 transactions</span>
+                </div>
+            </div>
+            
+            <div class="reportCard expense">
+                <h3>Total Expenses</h3>
+                <p id="reportTotalExpenses">₹0.00</p>
+                <div class="change-indicator negative">
+                    <i class="fas fa-arrow-up"></i>
+                    <span id="expenseChangePercent">0%</span> vs previous period
+                </div>
+                <div class="transaction-split">
+                    <span id="expenseCount" class="expense-count">0 transactions</span>
+                </div>
+            </div>
+            
+            <div class="reportCard savings">
+                <h3>Net Savings</h3>
+                <p id="reportNetSavings">₹0.00</p>
+                <div class="change-indicator positive">
+                    <i class="fas fa-arrow-up"></i>
+                    <span id="savingsChangePercent">0%</span> vs previous period
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <div class="chartRow">
+            <div class="chartCard">
+                <h3>Income vs Expenses</h3>
+                <div class="chart-container">
+                    <canvas id="incomeExpenseChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chartCard">
+                <h3>Monthly Breakdown</h3>
+                <div class="chart-container">
+                    <canvas id="monthlyBreakdownChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="chartRow">
+            <div class="chartCard">
+                <h3>Expense Categories</h3>
+                <div class="chart-container">
+                    <canvas id="expenseCategoriesChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chartCard">
+                <h3>Income Sources</h3>
+                <div class="chart-container">
+                    <canvas id="incomeSourcesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Spending Categories -->
+        <section class="topSpendingSection">
+            <div class="section-header">
+                <h2>Top Spending Categories</h2>
+                <button id="toggleTopCategories" class="btn filter-btn">Show All</button>
+            </div>
+            
+            <div class="top-categories" id="topCategoriesList">
+                <!-- Top categories will be loaded dynamically -->
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-bottom">
+            <p>BudgetBuddy - A Simple Expense Tracker &copy; 2025</p>
+            <p>Designed By Vinayak</p>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+    <script src="reports.js"></script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget - BudgetBuddy</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Mobile Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <button id="closeSidebar" class="close-btn">&times;</button>
+        </div>
+        <div class="sidebar-content">
+            <div class="sidebar-logo">
+                <h2>BudgetBuddy</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="add-transaction.html"><i class="fas fa-plus-minus"></i> Add Transaction</a></li>
+                    <li><a href="transactions.html"><i class="fas fa-exchange-alt"></i> Transactions</a></li>
+                    <li><a href="reports.html"><i class="fas fa-chart-pie"></i> Reports</a></li>
+                    <li><a href="budget.html"><i class="fas fa-rupee-sign"></i> Budget</a></li>
+                    <li class="logout-item"><a href="#" id="sidebarLogout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main navbar -->
+    <header class="main-header">
+        <div class="navbar">
+            <div class="navbar-left">
+                <button id="sidebarToggle" class="menu-toggle"><i class="fas fa-bars"></i></button>
+                <div class="logo">
+                    <h1>BudgetBuddy</h1>
+                </div>
+            </div>
+            <nav class="desktop-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="add-transaction.html">Add Transaction</a></li>
+                    <li><a href="transactions.html">Transactions</a></li>
+                    <li><a href="reports.html">Reports</a></li>
+                    <li class="active"><a href="budget.html">Budget</a></li>
+                </ul>
+            </nav>
+            <div class="navbar-right">
+                <a href="#" id="logoutBtn" class="logout-btn" title="Logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+        <div class="header-content">
+            <h2>Budget Planning</h2>
+            <p>Set and track your monthly budgets</p>
+        </div>
+    </header>
+    
+    <main class="mainContainer">
+        <!-- Budget Overview Section -->
+        <section class="budgetOverviewSection">
+            <div class="budgetHeader">
+                <h2>Monthly Budget Overview</h2>
+                <div class="month-selector">
+                    <button class="month-nav" id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+                    <h3 id="currentMonth">April 2023</h3>
+                    <button class="month-nav" id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+            
+            <div class="budgetSummaryCards">
+                <div class="budgetCard">
+                    <h3>Total Budget</h3>
+                    <p id="totalBudget">₹0.00</p>
+                </div>
+                
+                <div class="budgetCard">
+                    <h3>Total Spent</h3>
+                    <p id="totalSpent">₹0.00</p>
+                    <div class="progress-bar">
+                        <div class="progress" id="spentProgress" style="width: 0%;"></div>
+                    </div>
+                </div>
+                
+                <div class="budgetCard">
+                    <h3>Remaining</h3>
+                    <p id="remainingBudget">₹0.00</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Budgets Section -->
+        <section class="categoryBudgetsSection">
+            <div class="section-header">
+                <h2>Category Budgets</h2>
+                <button id="addBudgetBtn" class="btn filter-btn">Add Budget</button>
+            </div>
+            
+            <div class="budgetCategories" id="budgetCategoriesList">
+                <!-- Budget categories will be loaded dynamically -->
+            </div>
+            
+            <!-- Add/Edit Budget Form (Hidden by default) -->
+            <div class="budget-form" id="budgetForm" style="display: none;">
+                <h3 id="formTitle">Add New Budget</h3>
+                <form id="categoryBudgetForm">
+                    <div class="form-group">
+                        <label for="budgetCategory">Category</label>
+                        <select id="budgetCategory" required>
+                            <option value="" disabled selected>Select category</option>
+                            <option value="food">Food & Dining</option>
+                            <option value="rent">Rent / Mortgage</option>
+                            <option value="utilities">Utilities</option>
+                            <option value="transportation">Transportation</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="shopping">Shopping</option>
+                            <option value="healthcare">Healthcare</option>
+                            <option value="education">Education</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="budgetAmount">Budget Amount (₹)</label>
+                        <input type="number" id="budgetAmount" min="0" step="100" placeholder="0.00" required>
+                    </div>
+                    
+                    <input type="hidden" id="budgetId" value="">
+                    <input type="hidden" id="budgetMonth" value="">
+                    
+                    <div class="form-buttons">
+                        <button type="submit" class="btn incomeBtn">Save Budget</button>
+                        <button type="button" id="cancelBudget" class="btn reset-btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Budget Tips Section -->
+        <section class="budgetTipsSection">
+            <h2>Budgeting Tips</h2>
+            <div class="tips-container">
+                <div class="tip">
+                    <i class="fas fa-piggy-bank"></i>
+                    <h3>50/30/20 Rule</h3>
+                    <p>Allocate 50% of your income to needs, 30% to wants, and 20% to savings.</p>
+                </div>
+                
+                <div class="tip">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Track Regularly</h3>
+                    <p>Review your spending weekly to stay on track with your budget goals.</p>
+                </div>
+                
+                <div class="tip">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <h3>Prioritize Debt</h3>
+                    <p>Pay off high-interest debts first to save money in the long run.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-bottom">
+            <p>BudgetBuddy - A Simple Expense Tracker &copy; 2025</p>
+            <p>Designed By Vinayak</p>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+    <script src="budget.js"></script>
+</body>
+</html>

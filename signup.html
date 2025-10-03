@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - BudgetBuddy</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-logo">
+            <h1>BudgetBuddy</h1>
+        </div>
+        
+        <div class="auth-card">
+            <h2><i class="fas fa-user-plus"></i> Create an Account</h2>
+            
+            <div id="signupError" class="auth-error" style="display: none;">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorMessage">Error message will appear here</span>
+            </div>
+            
+            <form id="signupForm" class="auth-form">
+                <div class="form-group">
+                    <label for="newUsername">
+                        <i class="fas fa-user"></i> Username
+                    </label>
+                    <input type="text" id="newUsername" placeholder="Choose a username" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="newPassword">
+                        <i class="fas fa-key"></i> Password
+                    </label>
+                    <div class="password-input">
+                        <input type="password" id="newPassword" placeholder="Create a password" required>
+                        <button type="button" id="toggleNewPassword" class="toggle-password">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength">
+                        <span class="strength-label">Password strength:</span>
+                        <div class="strength-meter">
+                            <div class="strength-bar" id="strengthBar"></div>
+                        </div>
+                        <span id="strengthText">Weak</span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">
+                        <i class="fas fa-key"></i> Confirm Password
+                    </label>
+                    <div class="password-input">
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                        <button type="button" id="toggleConfirmPassword" class="toggle-password">
+                            <i class="far fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- <div class="form-group terms">
+                    <input type="checkbox" id="agreeTerms" required>
+                    <label for="agreeTerms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div> -->
+                
+                <button type="submit" class="btn auth-btn">Create Account</button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>Already have an account? <a href="login.html">Login</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>
